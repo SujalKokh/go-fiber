@@ -3,6 +3,7 @@ package infrastructure
 import (
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/cors"
+	"github.com/gofiber/fiber/v2/middleware/logger"
 )
 
 // Router -> Fiber Router
@@ -24,6 +25,8 @@ func NewRouter(env Env) Router {
 		ExposeHeaders:    "",
 		MaxAge:           0,
 	}))
+
+	httpRouter.Use(logger.New())
 
 	httpRouter.Get("/health-check", func(c *fiber.Ctx) error {
 		return c.JSON(fiber.Map{
