@@ -1,19 +1,30 @@
 package routes
 
-import "go.uber.org/fx"
+import (
+	"go.uber.org/fx"
+)
 
 // Module exports dependency of routes
-var Module = fx.Options()
+var Module = fx.Options(
+	fx.Provide(NewUsersRoute),
+	fx.Provide(NewRoutes),
+)
 
-type Routes []Routes
+// Routes contains multiple routes
+type Routes []Route
 
+// Route interface
 type Route interface {
 	Setup()
 }
 
 //NewRoute setups the routes
-func NewRoute() Routes {
-	return Routes{}
+func NewRoutes(
+	users UsersRoute,
+) Routes {
+	return Routes{
+		users,
+	}
 }
 
 // Setup all the routes
