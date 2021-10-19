@@ -3,6 +3,7 @@ package responses
 import (
 	"encoding/json"
 	"fmt"
+	"net/http"
 
 	"github.com/gin-gonic/gin/binding"
 	"github.com/go-playground/locales/en"
@@ -60,7 +61,7 @@ func JSONCount(c *fiber.Ctx, statusCode int, data interface{}, count int) error 
 }
 
 func NoContent(c *fiber.Ctx) error {
-	return c.Send(nil)
+	return c.SendStatus(http.StatusAccepted)
 }
 
 func Validator() ut.Translator {
