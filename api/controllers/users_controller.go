@@ -1,7 +1,9 @@
 package controllers
 
 import (
+	"go-fiber/api/responses"
 	"go-fiber/infrastructure"
+	"net/http"
 
 	"github.com/gofiber/fiber/v2"
 )
@@ -22,6 +24,5 @@ func NewUsersController(
 
 // HandleGetAllUsers -> get all the users
 func (controller UsersController) HandleGetAllUsers(c *fiber.Ctx) error {
-	c.SendString("Test response")
-	return nil
+	return responses.JSON(c, http.StatusOK, "hello")
 }
