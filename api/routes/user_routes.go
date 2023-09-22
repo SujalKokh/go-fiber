@@ -26,4 +26,5 @@ func NewUsersRoute(
 func (u UsersRoute) Setup() {
 	users := u.router.Group("/users")
 	users.Get("/", u.controller.HandleGetAllUsers)
+	users.Post("/", u.controller.CreateNewUser)
 }
